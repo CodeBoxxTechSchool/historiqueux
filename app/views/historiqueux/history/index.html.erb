@@ -1,0 +1,30 @@
+<%= javascript_include_tag 'historiqueux/application' %>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th>Évènement</th>
+    <th>Type d'élément</th>
+    <th>Fait par</th>
+    <th>Date</th>
+  </tr>
+  </thead>
+
+  <% @history.each do |event| %>
+      <tr>
+        <td>
+          <%= event.event %>
+        </td>
+        <td>
+          <%= event.item_type %>
+        </td>
+        <td>
+          <%= event.whodunnit %>
+        </td>
+        <td>
+          <%= event.created_at %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+<br/>
