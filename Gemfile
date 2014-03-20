@@ -5,7 +5,7 @@ source "https://rubygems.org"
 # development dependencies will be added by default to the :development group.
 
 gemspec
-gem 'paper_trail', '~> 3.0.1'
+gem 'paper_trail'
 gem 'coffee-rails'
 gem 'jquery-rails'
 
@@ -16,7 +16,10 @@ group :development, :test do
   gem 'fabrication'
   gem 'mysql2'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'cucumber-rails', :require => false
+  gem "twitter-bootstrap-rails"
+  gem "selenium-webdriver"
 end
 
 # Declare any dependencies that are still in development here instead of in

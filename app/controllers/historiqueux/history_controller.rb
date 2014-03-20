@@ -15,6 +15,20 @@ module Historiqueux
 
     end
 
+    def show
+
+      @parent_div = params[:parent_div]
+      @model_instance = fetch_resource
+      version_id = params[:version_id]
+      @preceding_version = @model_instance.versions.where(:id => version_id).first
+      @version = @preceding_version.next
+
+      if request.xhr?
+        render :layout => false
+      end
+
+    end
+
     def fetch_resource
       @resource = params[:resource]
       @class_name = classify_namespace(params[:resource])

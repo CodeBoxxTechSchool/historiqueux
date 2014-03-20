@@ -1,6 +1,7 @@
-<%= javascript_include_tag 'historiqueux/application' %>
 
-<table class="table">
+<%= javascript_include_tag "historiqueux/history" %>
+
+<table class="table table-hover">
   <thead>
   <tr>
     <th>Évènement</th>
@@ -10,8 +11,12 @@
   </tr>
   </thead>
 
-  <% @history.each do |event| %>
-      <tr>
+  <% @history.each_with_index do |event, idx| %>
+      <tr id="row<%= idx + 1 %>"
+          data-event-id="<%= event.id %>"
+          data-parent-div="<%= @parent_div %>"
+          data-resource="<%= @resource.downcase %>"
+          data-resource-id="<%= @resource_id %>" >
         <td>
           <%= event.event %>
         </td>

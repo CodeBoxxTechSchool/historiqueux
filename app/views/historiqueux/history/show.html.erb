@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="col-sm-12">
+    <div class="box">
+
+      <h3 id="event" >Évènement : <%= @preceding_version.event %></h3>
+
+      <h3>Quand : <%= @preceding_version.created_at %></h3>
+
+      <h3>Fait par : <%= @preceding_version.whodunnit %></h3>
+
+      <h3 id="item_type" >Élément : <%= @preceding_version.item_type %></h3>
+
+      <br/>
+
+      <div class="col-sm-10">
+
+        <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="" href="#collapseOne">Valeurs de cette version</a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+              <div class="panel-body">
+                <p id="current_version_values">
+
+                  <% unless @version.blank? %>
+                      <% if @version and @version.reify %>
+                          <% @version.reify.attributes.each do |attribute| %>
+                              <br/>
+                              <%= attribute %>
+                          <% end %>
+                      <% else %>
+                          Aucune valeur
+                      <% end %>
+                  <% else %>
+                      <% @model_instance.attributes.each do |attribute| %>
+                          <br/>
+                          <%= attribute %>
+                      <% end %>
+
+                  <% end %>
+
+
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="" href="#collapseTwo">Valeurs de la version
+                  précédente</a>
+              </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+              <div class="panel-body">
+                <p id="preceding_version_values">
+
+                  <% if @preceding_version and @preceding_version.reify %>
+                      <% @preceding_version.reify.attributes.each do |attribute| %>
+                          <br/>
+                          <%= attribute %>
+                      <% end %>
+                  <% else %>
+                      Aucune valeur
+                  <% end %>
+
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="" href="#collapseThree">Différence(s)</a>
+              </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+              <div class="panel-body">
+                <p id="differences">
+
+                  <% if @preceding_version and @preceding_version.respond_to?(:changeset) and @preceding_version.event != 'create'  %>
+                      <% @preceding_version.changeset.each do |attribute| %>
+                          <br/>
+                          <%= attribute %>
+                      <% end %>
+                  <% else %>
+                      Aucune valeur
+                  <% end %>
+
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions form-actions-padding-sm">
+          <div class="row">
+            <div class="col-md-10 col-md-offset-5">
+
+              <%= link_to "Retour", "#", :id => "event_back", :class => 'btn btn-primary',
+                          :data => {:parent => @parent_div,
+                                    :resource => @resource.downcase,
+                                    :id => @resource_id} %>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>
