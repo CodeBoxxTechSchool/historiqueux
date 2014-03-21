@@ -27,7 +27,7 @@
           <%= event.whodunnit %>
         </td>
         <td>
-          <%= event.created_at %>
+          <%= event.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%Y-%m-%d %H:%M:%S") %>
         </td>
       </tr>
   <% end %>
