@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2014031920510000) do
+ActiveRecord::Schema.define(version: 2014032113440000) do
 
   create_table "dummy_models", force: true do |t|
     t.text     "field1"
@@ -19,6 +19,14 @@ ActiveRecord::Schema.define(version: 2014031920510000) do
     t.text     "field3"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "horses", force: true do |t|
+    t.string   "name"
+    t.string   "length"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "dummy_model_id"
   end
 
   create_table "versions", force: true do |t|

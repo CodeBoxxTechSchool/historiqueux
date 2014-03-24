@@ -6,14 +6,53 @@ module Historiqueux
     def index
 
       resource = fetch_resource
-      @history = resource.versions
-      @parent_div = params[:parent_div]
+      if resource.respond_to?('versions')
+        @history = resource.versions
+        @parent_div = params[:parent_div]
+
+        @relations = @resourceKlass.reflect_on_all_associations.map { |r| "#{r.name}" }.reject { |i| i=='versions' }
+      end
 
       if request.xhr?
         render :layout => false
       end
 
     end
+
+    def index_relations
+
+      resource = fetch_resource
+      if resource.respond_to?('versions')
+        @history = resource.versions
+        @parent_div = params[:parent_div]
+
+        fetch_relation_resource(params[:relation_resource], resource)
+
+        if @relation_resourceKlass
+
+          @relations = @relation_resourceKlass.reflect_on_all_associations.map { |r| "#{r.name}" }.reject { |i| i=='versions' }
+
+          ##Filtrer ceux qui n'ont pas versions dans leurs relation
+          #relations_temp = []
+          #@relations.each do |relation|
+          #
+          #end
+
+
+          @history_relations = {}
+          @relation_resource_list.each do |rr|
+            @history_relations.store(rr.id, rr.versions)
+          end
+        end
+
+      end
+
+      if request.xhr?
+        render :layout => false
+      end
+
+    end
+
 
     def show
 
@@ -35,6 +74,16 @@ module Historiqueux
       @resourceKlass = eval(@class_name)
       @resource_id = params[:resource_id]
       @resourceKlass.find(@resource_id)
+    end
+
+    def fetch_relation_resource(relation_resource, resource)
+      @relation_resource = relation_resource
+      @relation_resource_list = resource.send(@relation_resource)
+      if @relation_resource_list.first.respond_to?('versions')
+        namespaced_class_name = @relation_resource_list.first.versions.first.item_type
+        @relation_class_name = classify_namespace(namespaced_class_name)
+        @relation_resourceKlass = eval(@relation_class_name)
+      end
     end
 
     def classify_namespace(const)
