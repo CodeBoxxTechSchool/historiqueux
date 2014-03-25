@@ -1,14 +1,15 @@
 <div class="container">
+
   <div class="col-sm-12">
     <div class="box">
 
-      <h3 id="event" >Évènement : <%= @preceding_version.event %></h3>
+      <h3 id="event">Évènement : <%= @preceding_version.event %></h3>
 
       <h3>Quand : <%= @preceding_version.created_at %></h3>
 
       <h3>Fait par : <%= @preceding_version.whodunnit %></h3>
 
-      <h3 id="item_type" >Élément : <%= @preceding_version.item_type %></h3>
+      <h3 id="item_type">Élément : <%= @preceding_version.item_type %></h3>
 
       <br/>
 
@@ -82,7 +83,7 @@
               <div class="panel-body">
                 <p id="differences">
 
-                  <% if @preceding_version and @preceding_version.respond_to?(:changeset) and @preceding_version.event != 'create'  %>
+                  <% if @preceding_version and @preceding_version.respond_to?(:changeset) and @preceding_version.event != 'create' %>
                       <% @preceding_version.changeset.each do |attribute| %>
                           <br/>
                           <%= attribute %>
@@ -115,4 +116,5 @@
 
     </div>
   </div>
+
 </div>

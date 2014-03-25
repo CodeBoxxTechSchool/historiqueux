@@ -1,82 +1,78 @@
-<div class="row">
-  <div class="col-md-2">
-    <h3><%= @resource %> no <%= @resource_id %></h3>
-  </div>
-  <div class="col-md-2">
+<div class="container">
 
-    <div>
+  <div class="row">
 
-      <div>
-        <a role="button" id="toggler" href="#" data-toggle="collapse" class="btn btn-primary btn-xs" data-target="#demo" >
-          Relations
-        </a>
+    <div class="col-md-3">
+      <h3><%= @resource %> no <%= @resource_id %></h3>
+    </div>
+    <div class="col-md-3">
+
+      <div class="box_content">
+
+        <div>
+          <a role="button" id="toggler" href="#" data-toggle="collapse" class="btn btn-primary btn-xs" data-target="#demo">
+            Relations
+          </a>
+        </div>
+
+        <div id="demo" class="collapse">
+          <% @relations.each do |relation| %>
+              <ul class="nav nav-list">
+
+                <%= link_to relation, "#", :class => 'event_open_relation',
+                            :data => {:parent => @parent_div,
+                                      :resource => @resource.downcase,
+                                      :id => @resource_id,
+                                      :relation => relation} %>
+
+
+              </ul>
+          <% end %>
+        </div>
+
       </div>
 
-      <div id="demo" class="collapse">
-        <% @relations.each do |relation| %>
-            <ul class="nav nav-list">
-
-              <%= link_to relation, "#", :class => 'event_open_relation',
-                          :data => {:parent => @parent_div,
-                                    :resource => @resource.downcase,
-                                    :id => @resource_id,
-                                    :relation => relation} %>
-
-
-            </ul>
-        <% end %>
-      </div>
     </div>
 
-
   </div>
 
-  <div class="col-md-2">
-  </div>
-  <div class="col-md-2">
-  </div>
-  <div class="col-md-2">
-  </div>
-  <div class="col-md-2">
-  </div>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Évènement</th>
+      <th>Type d'élément</th>
+      <th>Fait par</th>
+      <th class="col-md-4">Date</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <% @history.each_with_index do |event, idx| %>
+
+
+        <tr class="open_event_details"
+            id="row<%= idx + 1 %>"
+            data-event-id="<%= event.id %>"
+            data-parent-div="<%= @parent_div %>"
+            data-resource="<%= @resource.downcase %>"
+            data-resource-id="<%= @resource_id %>">
+
+          <td>
+            <%= event.event %>
+          </td>
+          <td>
+            <%= event.item_type %>
+          </td>
+          <td>
+            <%= event.whodunnit %>
+          </td>
+          <td>
+            <%= event.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%Y-%m-%d %H:%M:%S") %>
+          </td>
+
+        </tr>
+    <% end %>
+  </table>
+  <br/>
 
 </div>
-
-<table class="table table-hover">
-  <thead>
-  <tr>
-    <th>Évènement</th>
-    <th>Type d'élément</th>
-    <th>Fait par</th>
-    <th class="col-md-4">Date</th>
-    <th></th>
-  </tr>
-  </thead>
-
-  <% @history.each_with_index do |event, idx| %>
-
-
-      <tr class="open_event_details"
-          id="row<%= idx + 1 %>"
-          data-event-id="<%= event.id %>"
-          data-parent-div="<%= @parent_div %>"
-          data-resource="<%= @resource.downcase %>"
-          data-resource-id="<%= @resource_id %>">
-
-        <td>
-          <%= event.event %>
-        </td>
-        <td>
-          <%= event.item_type %>
-        </td>
-        <td>
-          <%= event.whodunnit %>
-        </td>
-        <td>
-          <%= event.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%Y-%m-%d %H:%M:%S") %>
-        </td>
-
-      </tr>
-  <% end %>
-</table>
-<br/>

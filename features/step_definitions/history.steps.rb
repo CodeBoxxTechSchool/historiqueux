@@ -83,7 +83,7 @@ Quand(/^je clique sur la section 'Différence\(s\)'$/) do
 end
 
 Et(/^la section "(.*?)" contient "(.*?)"$/) do |arg1, arg2|
-  page.find("#" + arg1).text.should include arg2
+  page.find(:xpath, "//*[@id='#{arg1}']").text.should include arg2
 end
 
 Et(/^une mise à jour est effectuée sur le 'DummyModel' (\d+) pour mettre le champs "(.*?)" a "(.*?)"$/) do |arg1, arg2, arg3|

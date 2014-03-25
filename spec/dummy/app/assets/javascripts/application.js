@@ -11,6 +11,6 @@
 // about supported directives.
 //= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
 //= require historiqueux/history
+//= require bootstrap
 //= require_tree
