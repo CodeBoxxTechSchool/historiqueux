@@ -2,8 +2,8 @@
 
 This is a mountable gem that add a bootstrap presentation layer to paper_trail.
 
-Inject some routes in your app that provides screens that help visualize any ressource versions, values and differences.
-Provide the ability no navigate related entities versions details."
+Inject some routes in your app that provides screens to help visualize any ressource versions, values and differences.
+Provide the ability no navigate related entities versions details.
 
 
 == Installation :
