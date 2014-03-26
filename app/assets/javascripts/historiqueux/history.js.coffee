@@ -63,8 +63,8 @@ $ () ->
         @
     @
 
-  $(document).delegate '.open_event_details', 'click', (e) ->
-    console.log('open_event_details click')
+  $(document).delegate '.event_open_details', 'click', (e) ->
+    console.log('event_open_details click')
     event.stopPropagation()
     event.preventDefault()
     event_id = $(@).data('event-id')

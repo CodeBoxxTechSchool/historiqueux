@@ -1,28 +1,47 @@
-== README
+= Historiqueux
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a mountable gem that add a bootstrap presentation layer to paper_trail.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Inject some routes in your app that provides screens that help visualize any ressource versions, values and differences.
+Provide the ability no navigate related entities versions details."
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+== Installation :
+
+Add the following line to your Gemfile
+
+=== Rails 4
+
+  gem 'historiqueux'
+
+== Usage
+
+Mount the historiqueux gem in your routes:
+
+  mount Historiqueux::Engine => "/"
+
+The routes that will be available are :
+
+  get '/historiqueux/:resource/:resource_id', to: 'history#index'
+  get '/historiqueux/:resource/:resource_id/relations/:relation_resource', to: 'history#index_relations'
+  get '/historiqueux/:resource/:resource_id/:version_id', to: 'history#show'
+
+where :resource is the name of your model (you can use namespace)
+
+
+====Include the needed javascript file in your application.js or application.js.coffee
+
+==== Javascript
+    //= require historiqueux/history
+==== CoffeeScript
+    #= require historiqueux/history
+
+== Contributors
+
+{Serge Savoie}[http://github.com/seurdge]
+
+{Rémi Gagnon}[http://github.com/rgagnon]
+
+== More
+
+http://www.groupefungo.ca

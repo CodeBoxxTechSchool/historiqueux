@@ -32,13 +32,6 @@ module Historiqueux
 
           @relations = @relation_resourceKlass.reflect_on_all_associations.map { |r| "#{r.name}" }.reject { |i| i=='versions' }
 
-          ##Filtrer ceux qui n'ont pas versions dans leurs relation
-          #relations_temp = []
-          #@relations.each do |relation|
-          #
-          #end
-
-
           @history_relations = {}
           @relation_resource_list.each do |rr|
             @history_relations.store(rr.id, rr.versions)

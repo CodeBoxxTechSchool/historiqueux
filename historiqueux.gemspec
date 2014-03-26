@@ -9,9 +9,9 @@ Gem::Specification.new do |s|
   s.version     = Historiqueux::VERSION
   s.authors     = ["Groupe Fungo inc."]
   s.email       = ["ssavoie@fungo.ca"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Historiqueux."
-  s.description = "TODO: Description of Historiqueux."
+  s.homepage    = "https://github.com/groupefungo/historiqueux"
+  s.summary     = "Add a bootstrap presentation layer to paper_trail"
+  s.description = "Inject some routes in your app that provides screens that help visualize any ressource versions, values and differences. Provide the ability no navigate related entities versions details."
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
 
