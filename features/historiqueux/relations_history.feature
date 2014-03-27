@@ -108,8 +108,8 @@ Fonctionnalité: En tant qu'utilisateur,
     Alors je clique sur le lien "toggler_relations0"
     Alors je vois le lien "dummy_model" dans la liste des relations affichées pour la première entité de la liste
     Et je clique sur le lien "dummy_model_open_relation0"
-    Alors la page d'index des relations "dummy_model" s'ouvre pour "horse"
-    Et la page contient "Liste des dummy_model liés au horses no 1"
+    Alors la page d'index des relations "dummy_model" s'ouvre pour "Horse"
+    Et la page contient "Liste des dummy_model liés au Horse no 1"
     Et la page contient "dummy_model no 1"
 
 

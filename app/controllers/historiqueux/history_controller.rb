@@ -30,7 +30,7 @@ module Historiqueux
 
         if @relation_resourceKlass
 
-          @relations = @relation_resourceKlass.reflect_on_all_associations.map { |r| "#{r.name}" }.reject { |i| i=='versions' }
+          @relations = @relation_resourceKlass.reflect_on_all_associations.map { |r| {:name => "#{r.name}", :parent => "#{r.active_record.to_s}"} }.reject { |i| i=='versions' }
 
           @history_relations = {}
           @relation_resource_list.each do |rr|
