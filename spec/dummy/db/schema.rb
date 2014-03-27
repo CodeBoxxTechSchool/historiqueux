@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(version: 2014032113440000) do
     t.integer  "dummy_model_id"
   end
 
+  create_table "poneys", force: true do |t|
+    t.string   "name"
+    t.integer  "age"
+    t.integer  "dummy_model_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "poneys", ["dummy_model_id"], name: "index_poneys_on_dummy_model_id", using: :btree
+
   create_table "versions", force: true do |t|
     t.string   "item_type",                         null: false
     t.integer  "item_id",                           null: false

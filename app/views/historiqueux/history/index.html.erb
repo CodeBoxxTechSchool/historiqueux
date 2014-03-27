@@ -10,16 +10,16 @@
       <div class="box_content">
 
         <div>
-          <a role="button" id="toggler" href="#" data-toggle="collapse" class="btn btn-primary btn-xs" data-target="#demo">
+          <a role="button" id="toggler_relations" href="#" data-toggle="collapse" class="btn btn-primary btn-xs" data-target="#relations_list">
             Relations
           </a>
         </div>
 
-        <div id="demo" class="collapse">
+        <div id="relations_list" class="collapse">
           <% @relations.each do |relation| %>
               <ul class="nav nav-list">
 
-                <%= link_to relation, "#", :class => 'event_open_relation',
+                <%= link_to relation, "#", :class => 'event_open_relation', :id => "#{relation}_relation_link",
                             :data => {:parent => @parent_div,
                                       :resource => @resource.downcase,
                                       :id => @resource_id,

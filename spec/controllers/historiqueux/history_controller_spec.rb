@@ -132,6 +132,14 @@ module Historiqueux
 
     end
 
+    describe "Comportement de la méthode 'ensure_enumerable'" do
+
+      it "si on a un seul objet (cas d'une relation belongs_to par exemple), on le transforme en array d'objets" do
+        obj = String.new
+        subject.ensure_enumerable(obj).should eq [obj]
+      end
+
+    end
 
   end
 end

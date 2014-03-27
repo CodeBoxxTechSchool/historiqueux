@@ -86,8 +86,37 @@ Et(/^la section "(.*?)" contient "(.*?)"$/) do |arg1, arg2|
   page.find(:xpath, "//*[@id='#{arg1}']").text.should include arg2
 end
 
-Et(/^une mise à jour est effectuée sur le 'DummyModel' (\d+) pour mettre le champs "(.*?)" a "(.*?)"$/) do |arg1, arg2, arg3|
-  model_to_update = DummyModel.find(arg1)
+Et(/^une mise à jour est effectuée sur le "(.*?)" (\d+) pour mettre le champs "(.*?)" a "(.*?)"$/) do |klassName, arg1, arg2, arg3|
+  klass = eval(klassName)
+  model_to_update = klass.find(arg1)
   model_to_update.send("#{arg2}=", arg3)
   model_to_update.save!
+end
+
+Et(/^cette entité "(.*?)" de "(.*?)" a "(.*?)" entité liée de type "(.*?)" dans une relation "(.*?)"$/) do |parent_id, parent_type, child_number, child_type, relation_type|
+  i = 0
+  while i<child_number.to_i
+    Fabricate(child_type.underscore, {:id => i+1, :dummy_model_id => @dummy_model.id})
+    i = i + 1
+  end
+end
+
+Alors(/^je vois le lien "(.*?)" dans la liste des relations affichées$/) do |arg1|
+  page.find(:xpath, "//*[@id='relations_list']").text.should include arg1
+end
+
+Alors(/^je vois le lien "(.*?)" dans la liste des relations affichées pour la première entité de la liste$/) do |arg1|
+  page.find(:xpath, "//*[@id='relations_list0']").text.should include arg1
+end
+
+Alors(/^la page d'index des relations s'ouvre pour "(.*?)"$/) do |arg1|
+  page.should have_content("Liste des #{arg1} liés au dummy_model")
+end
+
+Alors(/^la page d'index des relations "(.*?)" s'ouvre pour "(.*?)"$/) do |arg1, arg2|
+  page.should have_content("Liste des #{arg1} liés au #{arg2}")
+end
+
+Et(/^la page contient "(.*?)"$/) do |arg1|
+  page.should have_content(arg1)
 end

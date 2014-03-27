@@ -71,12 +71,20 @@ module Historiqueux
 
     def fetch_relation_resource(relation_resource, resource)
       @relation_resource = relation_resource
-      @relation_resource_list = resource.send(@relation_resource)
+      @relation_resource_list = ensure_enumerable(resource.send(@relation_resource))
       if @relation_resource_list.first.respond_to?('versions')
         namespaced_class_name = @relation_resource_list.first.versions.first.item_type
         @relation_class_name = classify_namespace(namespaced_class_name)
         @relation_resourceKlass = eval(@relation_class_name)
       end
+    end
+
+    def ensure_enumerable(object)
+      enum_object = object
+      unless object.respond_to?(:each)
+        enum_object = [object]
+      end
+      enum_object
     end
 
     def classify_namespace(const)

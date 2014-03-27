@@ -11,20 +11,20 @@
         <div class="col-md-2">
 
             <div>
-              <a role="button" id="toggler" href="#" data-toggle="collapse" class="btn btn-primary btn-xs" data-target="#demo<%= idx %>">
+              <a role="button" id="toggler_relations<%= idx %>" href="#" data-toggle="collapse" class="btn btn-primary btn-xs" data-target="#relations_list<%= idx %>">
                 Relations
               </a>
             </div>
 
             <% if @relations %>
-                <div id="demo<%= idx %>" class="collapse">
+                <div id="relations_list<%= idx %>" class="collapse">
                   <% @relations.each do |relation| %>
                       <ul class="nav nav-list">
 
-                        <%= link_to relation, "#", :id => "event_open_relation", :class => '',
+                        <%= link_to relation, "#", :id => "#{relation}_open_relation#{idx}", :class => 'event_open_relation',
                                     :data => {:parent => @parent_div,
-                                              :resource => @resource.downcase,
-                                              :id => @resource_id,
+                                              :resource => @relation_resource,
+                                              :id => relation_resource.id,
                                               :relation => relation} %>
 
 
@@ -54,11 +54,12 @@
               <% @history_relations[relation_resource.id].each_with_index do |event, idx| %>
 
 
-                  <tr id="row<%= idx + 1 %>"
+                  <tr class="event_open_details"
+                      id="row<%= idx + 1 %>"
                       data-event-id="<%= event.id %>"
                       data-parent-div="<%= @parent_div %>"
-                      data-resource="<%= @resource.downcase %>"
-                      data-resource-id="<%= @resource_id %>">
+                      data-resource="<%= @relation_resource.downcase %>"
+                      data-resource-id="<%= relation_resource.id %>">
 
                     <td>
                       <%= event.event %>
