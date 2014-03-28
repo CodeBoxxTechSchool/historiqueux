@@ -9,7 +9,6 @@ module Historiqueux
       if resource.respond_to?('versions')
         @history = resource.versions
         @parent_div = params[:parent_div]
-
         @relations = @resourceKlass.reflect_on_all_associations.map { |r| "#{r.name}" }.reject { |i| i=='versions' }
       end
 
@@ -30,12 +29,17 @@ module Historiqueux
 
         if @relation_resourceKlass
 
-          @relations = @relation_resourceKlass.reflect_on_all_associations.map { |r| {:name => "#{r.name}", :parent => "#{r.active_record.to_s}"} }.reject { |i| i=='versions' }
+          relations = @relation_resourceKlass.reflect_on_all_associations
+          cleaned_relations_array = remove_polymorphic_relations(relations)
+          @relations = cleaned_relations_array.map { |r| {:name => r.name,
+                                                          :parent => r.active_record.to_s,
+                                                          :klass => r.klass } }.reject { |i| i[:name]=='versions' }
 
           @history_relations = {}
           @relation_resource_list.each do |rr|
             @history_relations.store(rr.id, rr.versions)
           end
+
         end
 
       end
@@ -44,6 +48,20 @@ module Historiqueux
         render :layout => false
       end
 
+    end
+
+    def remove_polymorphic_relations(relations)
+      cleaned_array = []
+      relations.each do |relation|
+        unless relation.options.empty?
+          unless relation.options[:polymorphic]
+            cleaned_array << relation
+          end
+        else
+          cleaned_array << relation
+        end
+      end
+      cleaned_array
     end
 
 
