@@ -9,7 +9,7 @@ module Historiqueux
       if resource.respond_to?('versions')
         @history = resource.versions
         @parent_div = params[:parent_div]
-        @relations = @resourceKlass.reflect_on_all_associations.map { |r| "#{r.name}" }.reject { |i| i=='versions' }
+        @relations = @resourceKlass.reflect_on_all_associations.map { |r| r.name }.reject { |i| i == :versions }
       end
 
       if request.xhr?
@@ -33,7 +33,7 @@ module Historiqueux
           cleaned_relations_array = remove_polymorphic_relations(relations)
           @relations = cleaned_relations_array.map { |r| {:name => r.name,
                                                           :parent => r.active_record.to_s,
-                                                          :klass => r.klass } }.reject { |i| i[:name]=='versions' }
+                                                          :klass => r.klass } }.reject { |i| i[:name] == :versions }
 
           @history_relations = {}
           @relation_resource_list.each do |rr|
