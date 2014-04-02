@@ -36,6 +36,24 @@ where :resource is the name of your model (you can use namespace)
 ==== CoffeeScript
     #= require historiqueux/history
 
+Call url of historiqueux screens, for exemple, like that:
+
+<%= link_to "<i class='icon-time text-blue'></i> Historique".html_safe,
+    "/historiqueux/client::customer/#{@customer.id}?parent_div=ajax_target",
+    :id => "history_tab", :data => {:remote => true} %>
+
+With a binding like that in your application.js.coffee
+
+  $(document).delegate '#history_tab', 'ajax:success', (e, data, status, xhr) ->
+    $('.tab_header').removeClass('active')
+    $('#history_tab_header').addClass('active')
+    $('#ajax_target').html(xhr.responseText)
+
+
+== Credits
+
+{Andy Stewart}[http://github.com/airblade] - The creator of papertrail.
+
 == Contributors
 
 {Serge Savoie}[http://github.com/seurdge]

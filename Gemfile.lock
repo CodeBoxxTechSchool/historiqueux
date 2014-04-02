@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    historiqueux (0.0.9)
+    historiqueux (1.0.0)
       paper_trail
       rails (~> 4.0.3)
 
