@@ -38,9 +38,9 @@ where :resource is the name of your model (you can use namespace)
 
 Call url of historiqueux screens, for exemple, like that:
 
-<%= link_to "<i class='icon-time text-blue'></i> Historique".html_safe,
-    "/historiqueux/client::customer/#{@customer.id}?parent_div=ajax_target",
-    :id => "history_tab", :data => {:remote => true} %>
+    <%= link_to "<i class='icon-time text-blue'></i> Historique".html_safe,
+        "/historiqueux/client::customer/#{@customer.id}?parent_div=ajax_target",
+        :id => "history_tab", :data => {:remote => true} %>
 
 With a binding like that in your application.js.coffee
 
