@@ -7,7 +7,7 @@ $ () ->
     id = $(@).data('id')
     relation = $(@).data('relation')
     $.ajax
-      url: '/historiqueux/' + resource + '/' + id + '/relations/' + relation
+      url: $.App.root_path() + '/historiqueux/' + resource + '/' + id + '/relations/' + relation
       type: "get"
       dataType: "html"
       data:
@@ -30,7 +30,7 @@ $ () ->
     resource = $(@).data('resource')
     id = $(@).data('id')
     $.ajax
-      url: "/historiqueux/" + resource + "/" + id + "?parent_div=" + parent
+      url: $.App.root_path() + "/historiqueux/" + resource + "/" + id + "?parent_div=" + parent
       type: "get"
       dataType: "html"
       data:
@@ -54,7 +54,7 @@ $ () ->
     resource = $(@).data('resource')
     id = $(@).data('resource-id')
     $.ajax
-      url: "/historiqueux/" + resource + "/" + id + "/" + event_id
+      url: $.App.root_path() + "/historiqueux/" + resource + "/" + id + "/" + event_id
       type: "get"
       dataType: "html"
       data:

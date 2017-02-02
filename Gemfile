@@ -14,13 +14,14 @@ group :development, :test do
   gem 'simplecov'
   gem 'database_cleaner'
   gem 'fabrication'
-  gem 'mysql2'
+  gem 'mysql2', '0.3.18'
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'cucumber-rails', :require => false
   gem 'bootstrap-sass', '>= 3.0.0.0'
   gem "sass-rails", "~> 4.0.2"
   gem "selenium-webdriver"
+  gem 'test-unit'
 end
 
 # Declare any dependencies that are still in development here instead of in
